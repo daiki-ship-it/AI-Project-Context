@@ -4,14 +4,15 @@
     {
       "label": "Sync: git pull（GitHub の最新を手元に取り込む）",
       "type": "shell",
-      "command": "git pull --ff-only",
+      "command": "echo '=== 開いた直後の git pull（AI事業コンテキスト）===' && git pull --ff-only && echo '=== 完了 ==='",
       "options": {
         "cwd": "${workspaceFolder}"
       },
       "problemMatcher": [],
       "presentation": {
-        "reveal": "silent",
+        "reveal": "always",
         "panel": "shared",
+        "focus": false,
         "showReuseMessage": false
       },
       "runOptions": {
