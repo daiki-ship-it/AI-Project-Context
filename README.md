@@ -14,6 +14,8 @@
 
 Notion を更新すると、**GitHub Actions で `notion-tasks.generated.md` が更新される**（設定後）。Cursor では **`@context/notion-tasks.generated.md`** で最新タスク表を参照できる。
 
+**Mac のフォルダまで自動で揃えたい:** Git は **リモート（GitHub）だけ**を更新するので、手元は **`git pull` が必要**。朝に自動化する手順は [docs/LOCAL_AUTO_PULL.md](docs/LOCAL_AUTO_PULL.md)（`launchd` + `scripts/git-pull-repo.sh`）。
+
 ## 運用ルール（1人運用向け）
 
 1. **事実・数値・肩書・約束の文言は、該当する `ssot/*.md` だけを編集する。**  
@@ -31,6 +33,7 @@ Notion を更新すると、**GitHub Actions で `notion-tasks.generated.md` が
 | [context/notion-tasks.generated.md](context/notion-tasks.generated.md) | Notion タスク表の自動スナップショット（**編集禁止**） |
 | [context/current-phase.md](context/current-phase.md) | いまのフェーズ・焦点の短いメモ（任意・手動） |
 | [docs/NOTION_SYNC_SETUP.md](docs/NOTION_SYNC_SETUP.md) | Notion ↔ GitHub 自動同期のセットアップ手順 |
+| [docs/LOCAL_AUTO_PULL.md](docs/LOCAL_AUTO_PULL.md) | Mac で朝に自動 `git pull` する（任意） |
 | [ssot/brand.md](ssot/brand.md) | 表示名・事業コンセプト |
 | [ssot/career.md](ssot/career.md) | **経歴・実績・公表数値の正本** |
 | [ssot/profile.md](ssot/profile.md) | USP・キャラ・約束（事実の重複なし） |
