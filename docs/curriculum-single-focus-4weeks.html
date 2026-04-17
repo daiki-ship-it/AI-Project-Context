@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>4週間・一人全集中 — Proof → Transfer → Practice</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a2332;
+      --surface2: #141c28;
+      --text: #e8edf4;
+      --muted: #8b98a8;
+      --line: #2a3544;
+      --accent: #4a9eff;
+      --proof: #3d7ea6;
+      --transfer: #6b8f71;
+      --practice: #b89a5b;
+      --radius: 10px;
+      --font: "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      font-size: 15px;
+    }
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    header {
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 22px;
+    }
+    h1 {
+      font-size: 1.45rem;
+      font-weight: 650;
+      margin: 0 0 10px;
+      letter-spacing: 0.02em;
+    }
+    .lead {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 56em;
+      margin: 0;
+    }
+    .callout {
+      margin-top: 16px;
+      padding: 14px 16px;
+      background: var(--surface2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      border-left: 3px solid var(--accent);
+    }
+    .callout strong { color: var(--text); }
+
+    /* Top summary */
+    .top {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 14px;
+      margin: 18px 0 26px;
+    }
+    @media (max-width: 860px) {
+      .top { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      font-weight: 650;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    @media (max-width: 520px) {
+      .meta { grid-template-columns: 1fr; }
+    }
+    .meta strong {
+      display: block;
+      color: var(--text);
+      font-size: 0.82rem;
+      margin-bottom: 4px;
+    }
+
+    /* Pipeline */
+    .pipeline {
+      display: flex;
+      align-items: stretch;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      margin: 18px 0 10px;
+    }
+    .seg {
+      flex: 1;
+      padding: 12px 14px;
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 650;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .seg.proof { background: rgba(61, 126, 166, 0.22); color: #a8d4ef; }
+    .seg.transfer { background: rgba(107, 143, 113, 0.22); color: #c5e0c8; }
+    .seg.practice { background: rgba(184, 154, 91, 0.22); color: #e8d4a8; }
+    .note {
+      color: var(--muted);
+      font-size: 0.86rem;
+      margin: 0 0 18px;
+    }
+
+    /* Weeks layout */
+    .weeks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+    @media (max-width: 920px) {
+      .weeks { grid-template-columns: 1fr; }
+    }
+    .week {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .week-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface2);
+    }
+    .week-head .w {
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .pill {
+      display: inline-block;
+      font-size: 0.72rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      background: transparent;
+    }
+    .pill.proof { border-color: rgba(61, 126, 166, 0.45); color: #a8d4ef; }
+    .pill.transfer { border-color: rgba(107, 143, 113, 0.45); color: #c5e0c8; }
+    .pill.practice { border-color: rgba(184, 154, 91, 0.55); color: #e8d4a8; }
+
+    .week-body { padding: 14px; }
+    .week-body h3 {
+      margin: 0 0 6px;
+      font-size: 1.02rem;
+      font-weight: 650;
+    }
+    .goal {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    .cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 10px 0 8px;
+    }
+    @media (max-width: 520px) {
+      .cols { grid-template-columns: 1fr; }
+    }
+    .col {
+      border: 1px solid var(--line);
+      background: rgba(20, 28, 40, 0.75);
+      border-radius: 8px;
+      padding: 10px 10px;
+      font-size: 0.9rem;
+    }
+    .col .label {
+      color: var(--text);
+      font-weight: 650;
+      font-size: 0.82rem;
+      margin-bottom: 6px;
+    }
+    ul { margin: 0; padding-left: 1.15em; }
+    li { margin-bottom: 6px; }
+    li:last-child { margin-bottom: 0; }
+
+    .deliver {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px dashed var(--line);
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+    .deliver strong { color: var(--text); }
+
+    /* Daily rhythm */
+    .rhythm {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    @media (max-width: 900px) {
+      .rhythm { grid-template-columns: 1fr; }
+    }
+    .rhythm .slot {
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--surface2);
+    }
+    .rhythm h2 { margin: 0 0 8px; font-size: 0.95rem; font-weight: 650; }
+    .rhythm p { margin: 0; color: var(--muted); font-size: 0.88rem; }
+    .rhythm .slot strong { color: var(--text); }
+
+    /* Boundaries */
+    .boundaries {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+    .boundaries h2 { margin: 0 0 12px; font-size: 0.95rem; font-weight: 650; }
+    .two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    @media (max-width: 780px) {
+      .two { grid-template-columns: 1fr; }
+    }
+    .two strong {
+      display: block;
+      color: var(--text);
+      font-size: 0.82rem;
+      margin-bottom: 6px;
+    }
+
+    footer {
+      margin-top: 26px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    code {
+      background: rgba(20, 28, 40, 0.9);
+      border: 1px solid var(--line);
+      padding: 2px 6px;
+      border-radius: 6px;
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>4週間・一人全集中（テスト）<br />Proof → Transfer → Practice</h1>
+      <p class="lead">
+        目的は「その人を救う」だけでなく、<strong>本商品の限界値・事故パターン・工数感</strong>を掴み、次の3〜5人展開に耐える“型”へ落とすこと。
+      </p>
+      <div class="callout">
+        <strong>この4週で必ず起こすこと：</strong>
+        (1) 現場で動く（Proof）／(2) 仕組みを本人の言葉で説明できる（Transfer）／(3) 本人が自分で1回直す or 増やす（Practice）
+      </div>
+    </header>
+
+    <section class="top">
+      <div class="card">
+        <h2>スコープ（全集中でも “無限化” しない）</h2>
+        <div class="meta">
+          <div>
+            <strong>対象業務</strong>
+            Quick Win 1本 ＋ 本丸 1本（最大でも2本まで）
+          </div>
+          <div>
+            <strong>成果物（必須）</strong>
+            運用地図 v1→v2／トラブル短冊／次の一歩リスト
+          </div>
+          <div>
+            <strong>支援の強度</strong>
+            あなたは“実装”も担う。ただし後半は本人の手を増やす。
+          </div>
+          <div>
+            <strong>勝ち筋</strong>
+            速い成功体験→見える化→本人の手で1回の順で自信を作る
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>最終アウトカム（終わり方）</h2>
+        <div class="meta" style="grid-template-columns: 1fr;">
+          <div>
+            <strong>本人ができるようになる範囲</strong>
+            「軽い例外の修正」「出力品質の調整」「次の自動化を設計する入口」
+          </div>
+          <div>
+            <strong>外に頼む範囲（地図化）</strong>
+            大改修・追加業務のフル構築・緊急対応（別料金の枠）
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="pipeline" aria-hidden="true">
+      <div class="seg proof">Week 1 · 境界/選定</div>
+      <div class="seg proof">Week 2 · Proof（Quick Win）</div>
+      <div class="seg transfer">Week 3 · Transfer（見える化）</div>
+      <div class="seg practice">Week 4 · Practice（本人主導で1回）</div>
+    </div>
+    <p class="note">全集中のポイントは「作って終わり」にしないこと。Week3で“触らせ”、Week4で“本人主導で1回”を確定させる。</p>
+
+    <section class="weeks">
+      <article class="week">
+        <div class="week-head">
+          <div class="w">Week 1</div>
+          <span class="pill proof">境界 / 選定</span>
+        </div>
+        <div class="week-body">
+          <h3>業務分解 → スコープ固定（ここで勝負が決まる）</h3>
+          <p class="goal">「やらないこと」「危険領域（人が必ず見る）」を先に決めて、後半の自走が崩れない土台を作る。</p>
+          <div class="cols">
+            <div class="col">
+              <div class="label">本人（入力）</div>
+              <ul>
+                <li>画面共有で実作業を見せる（30〜40分）</li>
+                <li>判断基準を音声で送る（“なぜそうするか”）</li>
+                <li>成功の定義（何分減ればOK）を決める</li>
+              </ul>
+            </div>
+            <div class="col">
+              <div class="label">伴走（設計）</div>
+              <ul>
+                <li>Quick Win 1本 / 本丸 1本を確定</li>
+                <li>危険領域の線引き（AIに任せない領域）</li>
+                <li>別料金の代行範囲を明文化（期待値を揃える）</li>
+              </ul>
+            </div>
+          </div>
+          <div class="deliver"><strong>成果物：</strong>要件1枚（やらないこと含む）・運用の入口（入力/出力/禁止）</div>
+        </div>
+      </article>
+
+      <article class="week">
+        <div class="week-head">
+          <div class="w">Week 2</div>
+          <span class="pill proof">Proof</span>
+        </div>
+        <div class="week-body">
+          <h3>Quick Win を最速で納品（成功体験で恐怖を止める）</h3>
+          <p class="goal">まず“効く”を作って信頼と余白を確保する。ブラックボックスは禁止（最低限の見える化は同梱）。</p>
+          <div class="cols">
+            <div class="col">
+              <div class="label">本人（運用）</div>
+              <ul>
+                <li>実際に毎日使う（最低3日）</li>
+                <li>違和感を音声で投げる（短くてOK）</li>
+                <li>「ここは任せたくない」を言語化</li>
+              </ul>
+            </div>
+            <div class="col">
+              <div class="label">伴走（実装）</div>
+              <ul>
+                <li>Quick Win を構築・テスト・納品</li>
+                <li>壊れたら最初に見る3ステップを用意</li>
+                <li>触って良い/危険のミニ地図を添付</li>
+              </ul>
+            </div>
+          </div>
+          <div class="deliver"><strong>成果物：</strong>動く仕組み（Quick Win）＋ミニ地図（入口/一次対応）</div>
+        </div>
+      </article>
+
+      <article class="week">
+        <div class="week-head">
+          <div class="w">Week 3</div>
+          <span class="pill transfer">Transfer</span>
+        </div>
+        <div class="week-body">
+          <h3>本丸の見える化（ここで本人が1回“触る”）</h3>
+          <p class="goal">IT用語ではなく、現場の言葉で「5分説明」できる状態へ。軽い例外は本人が直してみる。</p>
+          <div class="cols">
+            <div class="col">
+              <div class="label">本人（言い直し＋1回触る）</div>
+              <ul>
+                <li>あなたの説明を“自分の言葉”で言い直す（15分）</li>
+                <li>文言/条件など軽い変更を1つ実行</li>
+                <li>出力のOK/NGを自分の基準で定義</li>
+              </ul>
+            </div>
+            <div class="col">
+              <div class="label">伴走（翻訳と補助輪）</div>
+              <ul>
+                <li>本丸を共同で仕上げる（または納品）</li>
+                <li>エラーは9割整え、1割は本人の手で</li>
+                <li>説明資料を「5分説明」版に落とす</li>
+              </ul>
+            </div>
+          </div>
+          <div class="deliver"><strong>成果物：</strong>運用地図 v1（5分説明）・「本人が触って変えた」実績1回</div>
+        </div>
+      </article>
+
+      <article class="week">
+        <div class="week-head">
+          <div class="w">Week 4</div>
+          <span class="pill practice">Practice</span>
+        </div>
+        <div class="week-body">
+          <h3>本人主導の小さな追加 → 終了後も回る形へ</h3>
+          <p class="goal">“自分で増やした/直した”を確定させ、次の1歩と境界（自走/依頼）を地図にして終える。</p>
+          <div class="cols">
+            <div class="col">
+              <div class="label">本人（主導）</div>
+              <ul>
+                <li>横展開 or 軽い改善を1つ提案して実行</li>
+                <li>週1の点検ルール（入力/出力/品質）を回す</li>
+                <li>次の一歩を3つ書く（自分で触る順）</li>
+              </ul>
+            </div>
+            <div class="col">
+              <div class="label">伴走（柵とレビュー）</div>
+              <ul>
+                <li>危険チェックとレビューのみ（丸ごと代行しない）</li>
+                <li>トラブル短冊を整え、一次対応を固定</li>
+                <li>3ヶ月の地図（自分/外注）を提示</li>
+              </ul>
+            </div>
+          </div>
+          <div class="deliver"><strong>成果物：</strong>運用地図 v2・トラブル短冊・次の一歩リスト・境界の地図（自走/依頼）</div>
+        </div>
+      </article>
+    </section>
+
+    <section class="rhythm">
+      <div class="slot">
+        <h2>非同期のリズム（毎日）</h2>
+        <p>
+          本人は<strong>音声で「困った/違和感」</strong>を投げる。あなたは<strong>24時間以内に方向性</strong>を返す（修正は翌営業日までに）。
+        </p>
+      </div>
+      <div class="slot">
+        <h2>週次のリズム（週1）</h2>
+        <p>
+          60分で「進捗 → 詰まり → 次の1手」。必ず<strong>本人が触るタスク</strong>をその場で決める。
+        </p>
+      </div>
+      <div class="slot">
+        <h2>“全集中”の守り</h2>
+        <p>
+          何でもやらない。<strong>業務本数の上限</strong>と<strong>別料金の代行枠</strong>を最初に明文化して、終わりを作る。
+        </p>
+      </div>
+    </section>
+
+    <section class="boundaries">
+      <h2>別料金（別軸）に切り出すライン</h2>
+      <div class="two">
+        <div>
+          <strong>本プログラムに含める</strong>
+          初回実装（Quick Win＋本丸）、見える化（運用地図）、トラブル短冊、レビュー、安全柵、本人のPractice支援。
+        </div>
+        <div>
+          <strong>別料金の例（依頼したい人向け）</strong>
+          追加業務のフル構築、緊急の丸直し、月次運用代行、複数部署/複数人展開、継続的な改善開発。
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      ドキュメント：<code>docs/curriculum-single-focus-4weeks.html</code> — Cursor から開くか、ブラウザで表示してください。
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>事業内容図解 — 不安の解消を看板にした4週間AI伴走</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a2332;
+      --surface2: #141c28;
+      --text: #e8edf4;
+      --muted: #8b98a8;
+      --line: #2a3544;
+      --accent: #4a9eff;
+      --good: #6b8f71;
+      --warn: #b89a5b;
+      --proof: #3d7ea6;
+      --transfer: #6b8f71;
+      --practice: #b89a5b;
+      --radius: 10px;
+      --font: "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      font-size: 15px;
+    }
+    .wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 32px 20px 52px;
+    }
+    header {
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 22px;
+    }
+    h1 {
+      font-size: 1.45rem;
+      font-weight: 650;
+      margin: 0 0 10px;
+      letter-spacing: 0.02em;
+    }
+    .lead {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 60em;
+      margin: 0;
+    }
+    .promise {
+      margin-top: 14px;
+      padding: 14px 16px;
+      background: var(--surface2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      font-weight: 650;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .kicker {
+      display: inline-block;
+      font-size: 0.72rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .kicker.accent { border-color: rgba(74, 158, 255, 0.5); color: #a8d4ef; }
+    .kicker.good { border-color: rgba(107, 143, 113, 0.5); color: #c5e0c8; }
+    .kicker.warn { border-color: rgba(184, 154, 91, 0.55); color: #e8d4a8; }
+
+    .bullets {
+      margin: 10px 0 0;
+      padding-left: 1.15em;
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+    .bullets li { margin-bottom: 6px; }
+    .bullets li:last-child { margin-bottom: 0; }
+
+    .pipeline {
+      display: flex;
+      align-items: stretch;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      margin: 18px 0 10px;
+    }
+    .seg {
+      flex: 1;
+      padding: 12px 14px;
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 650;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .seg.proof { background: rgba(61, 126, 166, 0.22); color: #a8d4ef; }
+    .seg.transfer { background: rgba(107, 143, 113, 0.22); color: #c5e0c8; }
+    .seg.practice { background: rgba(184, 154, 91, 0.22); color: #e8d4a8; }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.86rem;
+      margin: 0 0 18px;
+    }
+
+    .weeks {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      align-items: start;
+      margin-top: 10px;
+    }
+    @media (max-width: 980px) {
+      .weeks { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .weeks { grid-template-columns: 1fr; }
+    }
+    .wcard {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      overflow: hidden;
+      min-height: 220px;
+    }
+    .whead {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 12px;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--line);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .pill {
+      font-size: 0.72rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .pill.proof { border-color: rgba(61, 126, 166, 0.45); color: #a8d4ef; }
+    .pill.transfer { border-color: rgba(107, 143, 113, 0.45); color: #c5e0c8; }
+    .pill.practice { border-color: rgba(184, 154, 91, 0.55); color: #e8d4a8; }
+
+    .wbody { padding: 12px 12px 14px; }
+    .wbody .goal { margin: 0 0 10px; color: var(--muted); font-size: 0.86rem; }
+    .wbody ul { margin: 0; padding-left: 1.15em; font-size: 0.9rem; }
+    .wbody li { margin-bottom: 6px; }
+    .wbody li:last-child { margin-bottom: 0; }
+    .deliver {
+      margin-top: 12px;
+      padding: 10px 10px;
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+    .deliver strong { color: var(--text); }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    @media (max-width: 860px) {
+      .split { grid-template-columns: 1fr; }
+    }
+
+    .tableish {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .row {
+      padding: 12px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--surface2);
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .row strong { color: var(--text); }
+
+    footer {
+      margin-top: 24px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    code {
+      background: rgba(20, 28, 40, 0.9);
+      border: 1px solid var(--line);
+      padding: 2px 6px;
+      border-radius: 6px;
+      color: var(--text);
+    }
+    a { color: #a8d4ef; }
+
+    /* Value stack: C → B → A */
+    .value-stack {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .layer {
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      padding: 16px 18px;
+      background: var(--surface);
+    }
+    .layer .tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+      color: var(--muted);
+    }
+    .layer.c {
+      border-color: rgba(74, 158, 255, 0.45);
+      background: rgba(26, 35, 50, 0.95);
+    }
+    .layer.c .tag { color: #a8d4ef; }
+    .layer.c h2 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+      font-weight: 650;
+    }
+    .layer.c p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+    .layer.b .tag { color: #c5e0c8; }
+    .layer.a .tag { color: #a8d4ef; }
+    .layer h3 {
+      margin: 0 0 6px;
+      font-size: 0.95rem;
+      font-weight: 650;
+    }
+    .layer p.sub {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    .arrow-hint {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      padding: 2px 0;
+    }
+
+    .icp {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--surface2);
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .icp strong { color: var(--text); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>事業内容（仮説）図解<br />看板は「不安の解消」— 4週間で自走の確信へ</h1>
+      <p class="lead">
+        売るのはツール講座でも、自動化代行でもない。<strong>AI時代に置いていかれない確信</strong>。
+        そのために、現場で1本動かし（証拠）、仕組みを言語化し、本人の手で直す成功体験まで連れていく。
+      </p>
+      <div class="promise">
+        <strong>約束（刺さる一文）：</strong>
+        最初の1本を一緒に動かし、次から「自分で直せる・増やせる」状態にする。だから<strong>置いていかれない</strong>。<br />
+        時間短縮はその証拠（副産物）。丸投げ運用代行・追加構築は別軸（別料金）。
+      </div>
+    </header>
+
+    <section class="value-stack" aria-label="提供価値の階層">
+      <div class="layer c">
+        <span class="tag">C · 本丸（売る価値）</span>
+        <h2>「置いていかれない」確信を取り戻す</h2>
+        <p>
+          根源の不安（時代に取り残される／自分には無理）を、<strong>再現できる小さな成功と言語化</strong>で下げる。
+          ここが満たされないと、たとえ時短が出ても心は止まらない。
+        </p>
+      </div>
+      <div class="arrow-hint">手段として</div>
+      <div class="layer b">
+        <span class="tag">B · 手段（届ける力）</span>
+        <h3>自走できる力（直す・増やす・線を引く）</h3>
+        <p class="sub">
+          ブラックボックスを作らず、判断基準と運用地図を残す。伴走は「柵」と「翻訳」に寄せる。
+        </p>
+        <ul class="bullets">
+          <li>壊れたときの一次対応が自分でできる</li>
+          <li>次の改善を「自分の言葉」で設計できる</li>
+          <li>危険領域（人が必ず見る）を自分で線引きできる</li>
+        </ul>
+      </div>
+      <div class="arrow-hint">証拠として</div>
+      <div class="layer a">
+        <span class="tag">A · 証拠（副産物）</span>
+        <h3>業務が1本、現場で動く</h3>
+        <p class="sub">
+          Quick Win で不安を止め、本丸で価値を積み上げる。ここは「確信のための実物デモ」。
+        </p>
+        <ul class="bullets">
+          <li>毎日の「めんどくさい」が減る体感（時間の余白）</li>
+          <li>現場で回る仕組み（ただし見える化は必須）</li>
+        </ul>
+      </div>
+    </section>
+
+    <p class="icp">
+      <strong>誰に（仮説）：</strong>現場×経営が近い個人事業で、AIツール迷子・時間不足・IT劣等感を抱えつつ、本質的な解決には払う層。
+    </p>
+
+    <div class="pipeline" aria-hidden="true">
+      <div class="seg proof">Week 1 · 境界/選定</div>
+      <div class="seg proof">Week 2 · Proof（Quick Win）</div>
+      <div class="seg transfer">Week 3 · Transfer（見える化）</div>
+      <div class="seg practice">Week 4 · Practice（本人主導で1回）</div>
+    </div>
+    <p class="note">4週間の流れはそのまま「不安を止める → 言語化 → 本人の手で確信を作る」。自動化は主目的ではなく、確信のための証拠。</p>
+
+    <section class="weeks" aria-label="4週間の全体像">
+      <article class="wcard">
+        <div class="whead">Week 1 <span class="pill proof">境界</span></div>
+        <div class="wbody">
+          <p class="goal">「何を怖がっているか」を言語化し、スコープを固定。迷いで負けない土台。</p>
+          <ul>
+            <li>Quick Win 1本 / 本丸 1本を確定（上限を決める）</li>
+            <li>危険領域（AIに任せない）を線引き</li>
+            <li>別料金の代行範囲を明文化</li>
+          </ul>
+          <div class="deliver"><strong>成果物：</strong>要件1枚（やらないこと含む）</div>
+        </div>
+      </article>
+
+      <article class="wcard">
+        <div class="whead">Week 2 <span class="pill proof">Proof</span></div>
+        <div class="wbody">
+          <p class="goal">「AIは自分の敵じゃない」最初の証拠。不安の勢いを止める。</p>
+          <ul>
+            <li>現場投入・最短で「楽になった」を体感</li>
+            <li>ブラックボックス禁止（一次対応を同梱）</li>
+            <li>違和感を音声で集め、次週の材料に</li>
+          </ul>
+          <div class="deliver"><strong>成果物：</strong>動く仕組み＋ミニ地図</div>
+        </div>
+      </article>
+
+      <article class="wcard">
+        <div class="whead">Week 3 <span class="pill transfer">Transfer</span></div>
+        <div class="wbody">
+          <p class="goal">「分からない」を減らす。本人の言葉で説明でき、1回触れる。</p>
+          <ul>
+            <li>運用地図 v1（入口・判断基準）を作る</li>
+            <li>軽い例外対応を本人が1つ実行</li>
+            <li>詰まりを教材化（現場語で翻訳）</li>
+          </ul>
+          <div class="deliver"><strong>成果物：</strong>運用地図 v1・触った実績</div>
+        </div>
+      </article>
+
+      <article class="wcard">
+        <div class="whead">Week 4 <span class="pill practice">Practice</span></div>
+        <div class="wbody">
+          <p class="goal">「自分は使いこなす側だ」という確信のスイッチ。本人主導で1回。</p>
+          <ul>
+            <li>横展開 or 軽い改善を本人主導で1回</li>
+            <li>一次対応を固定（トラブル短冊）</li>
+            <li>次の一歩と境界（自走/依頼）を確定</li>
+          </ul>
+          <div class="deliver"><strong>成果物：</strong>運用地図 v2・短冊・次の一歩</div>
+        </div>
+      </article>
+    </section>
+
+    <section class="split">
+      <div class="card">
+        <span class="kicker warn">提供物（納品物）</span>
+        <h2>確信を残す「地図」と「短冊」</h2>
+        <p style="margin: 0 0 8px; color: var(--muted); font-size: 0.9rem;">
+          時短のための資料ではなく、<strong>不安が出たときに自分で立て直せる</strong>ためのセット。
+        </p>
+        <div class="tableish">
+          <div class="row"><strong>運用地図</strong>：何がどこで動き、何を変えると何が変わるか</div>
+          <div class="row"><strong>トラブル短冊</strong>：よくある失敗と一次対応（現場語で）</div>
+          <div class="row"><strong>次の一歩リスト</strong>：「次に自分で触る」順番（自動化の順番ではなく）</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="kicker accent">料金体系（設計）</span>
+        <h2>本体は“確信と自走”まで。代行は別軸</h2>
+        <p>依存を生まないために、提供範囲と追加料金ラインを最初に可視化する。</p>
+        <div class="tableish">
+          <div class="row"><strong>本体（4週）に含む</strong>：初回実装、見える化、レビュー、安全柵、Practice支援</div>
+          <div class="row"><strong>別軸（別料金）の例</strong>：追加業務フル構築、緊急の丸直し、月次運用代行</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      ドキュメント：<code>docs/business-offer-4weeks-diagram.html</code> ／ 週次詳細：<a href="./curriculum-single-focus-4weeks.html">curriculum-single-focus-4weeks.html</a>
+    </footer>
+  </div>
+</body>
+</html>
