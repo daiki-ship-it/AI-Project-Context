@@ -2,6 +2,7 @@
  * Notion データベースを取得し、Markdown を生成する。
  * 環境変数: NOTION_TOKEN, NOTION_DATABASE_ID（必須）
  */
+import "dotenv/config";
 import { Client } from "@notionhq/client";
 import { writeFileSync } from "fs";
 import { fileURLToPath } from "url";
