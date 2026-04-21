@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI業務再設計30日伴走プログラム利用契約書（甲記入用）</title>
+  <style>
+    :root {
+      --bg: #fafbfc;
+      --text: #1a1a1a;
+      --muted: #5c6570;
+      --line: #cfd6dd;
+      --input-bg: #fff;
+      --accent: #2563eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Segoe UI", sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+    }
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 16px;
+      background: #e8ecf1;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+    .toolbar button {
+      padding: 8px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+    }
+    .toolbar button.primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .toolbar .hint { color: var(--muted); flex: 1 1 280px; min-width: 200px; }
+    .toolbar-row { width: 100%; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .toolbar-row + .toolbar-row { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line); }
+    .print-footer-tip { font-size: 12px; color: #9a3412; background: #fff7ed; padding: 8px 10px; border-radius: 6px; border: 1px solid #fdba74; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+    .doc {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 24px 20px 48px;
+    }
+    h1.doc-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0 0 16px;
+      text-align: center;
+    }
+    h2 {
+      font-size: 1.05rem;
+      font-weight: 650;
+      margin: 22px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--line);
+    }
+    p { margin: 0 0 10px; }
+    hr.sep { border: none; border-top: 1px solid var(--line); margin: 18px 0; }
+    .field-block {
+      margin: 8px 0 6px;
+      padding-left: 0;
+    }
+    .field-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin: 6px 0;
+      flex-wrap: wrap;
+    }
+    .field-row label { min-width: 11em; font-weight: 600; }
+    .field-row input[type="text"],
+    .field-row input[type="email"],
+    .field-row input:not([type]) {
+      flex: 1;
+      min-width: 200px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--input-bg);
+      font-size: 14px;
+    }
+    .party-head { margin-top: 12px; font-weight: 700; }
+    input.readonly-fixed {
+      background: #f0f3f6 !important;
+      color: #333;
+      cursor: default;
+    }
+    .sign-table, .besshi-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 13px;
+    }
+    .sign-table td, .besshi-table th, .besshi-table td {
+      border: 1px solid var(--line);
+      padding: 8px 10px;
+      vertical-align: top;
+    }
+    .sign-table .lbl { width: 28%; background: #f0f3f6; font-weight: 600; }
+    .w-year { width: 4.5em; }
+    .w-month, .w-day { width: 3em; }
+    .besshi-table th { background: #f0f3f6; text-align: left; }
+    .besshi-opts label { margin-right: 12px; white-space: nowrap; }
+    @media print {
+      .toolbar { display: none !important; }
+      body { background: #fff; }
+      input, textarea {
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+      }
+      input::placeholder { color: transparent; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="toolbar-row">
+      <button type="button" class="primary" id="btnPrint">PDF用に印刷（または保存）</button>
+      <button type="button" id="btnClearKou">入力をやり直す</button>
+      <span class="hint">甲（お客様）の欄に記入し、内容をご確認のうえ「PDF用に印刷」から<strong>PDFに保存</strong>して、担当者へお送りください。</span>
+    </div>
+    <div class="toolbar-row print-footer-tip">
+      <strong>PDFで左下に変な英語やパスが付くとき：</strong>印刷の確認画面で<strong>「ヘッダーとフッター」</strong>（または「ヘッダー・フッター」）の<strong>チェックを外す</strong>。ブラウザが自動で付けるもので、契約書の本文ではありません。
+    </div>
+  </div>
+  <main class="doc">
+    <h1 class="doc-title">AI業務再設計30日伴走プログラム利用契約書</h1>
+    <p>甲及び乙は、乙が提供する「AI業務再設計30日伴走プログラム」（以下「本プログラム」という。）の利用に関し、次のとおり契約を締結する。</p>
+    <hr class="sep" />
+
+    <h2>第1条（当事者）</h2>
+    <p class="party-head">1. 甲（受講者）（本プログラムを受講する者をいいます。）</p>
+    <div class="field-block">
+      <div class="field-row"><label for="kou_name">氏名又は名称</label><input type="text" id="kou_name" name="kou_name" autocomplete="name" /></div>
+      <div class="field-row"><label for="kou_addr">住所</label><input type="text" id="kou_addr" name="kou_addr" autocomplete="street-address" /></div>
+      <div class="field-row"><label for="kou_rep">（法人の場合）代表者氏名</label><input type="text" id="kou_rep" name="kou_rep" /></div>
+      <div class="field-row"><label for="kou_email">連絡用電子メールアドレス</label><input type="email" id="kou_email" name="kou_email" autocomplete="email" /></div>
+    </div>
+    <p class="party-head">2. 乙（サービス提供者）（本プログラムを提供する者をいいます。）</p>
+    <div class="field-block">
+      <div class="field-row"><label for="otsu_name">氏名又は名称</label><input type="text" id="otsu_name" name="otsu_name" class="readonly-fixed" readonly /></div>
+      <div class="field-row"><label for="otsu_addr">住所</label><input type="text" id="otsu_addr" name="otsu_addr" class="readonly-fixed" readonly /></div>
+      <div class="field-row"><label for="otsu_rep">（法人の場合）代表者氏名</label><input type="text" id="otsu_rep" name="otsu_rep" class="readonly-fixed" readonly /></div>
+      <div class="field-row"><label for="otsu_email">連絡用電子メールアドレス</label><input type="email" id="otsu_email" name="otsu_email" class="readonly-fixed" readonly /></div>
+    </div>
+    <p>甲及び乙を、以下「当事者」といい、それぞれを「当事者一方」といいます。</p>
+    <p>3. 当事者は、本契約に関する通知、催告その他の通信（以下「通知等」という。）を、前各号の電子メールアドレス宛に送信することにより行うことができるものとします。当事者は、電子メールアドレスを変更するときは、書面又は前項の電子メールアドレスを用いて速やかに相手方に通知するものとします。</p>
+    <hr class="sep" />
+<h2>第2条（契約の目的）</h2>
+<p>1. 乙は、本契約に基づき、甲に対し、本プログラムとして、甲の個人事業、小規模事業その他甲が乙に開示する業務のうちボトルネックとなる業務の候補を特定し、甲乙が次項に従い合意した<strong>対象業務</strong>について、当該業務をデータ・手順・集計等を含めて生成AIを前提とした形に組み替えること、並びに甲が自らAIワークフローを構築・試行・修正できる状態に至るまでの伴走を提供するものとします。</p>
+<p>2. <strong>対象業務</strong>とは、前項の候補について、甲乙が協議のうえ、書面又は第1条第3項に定める通知等により合意した業務をいいます。本プログラムにおける乙の伴走の範囲は、対象業務に限られるものとします。対象業務の追加又は変更は、甲乙の合意によるものとします。</p>
+<hr class="sep" />
+<h2>第2条の2（契約上の地位）</h2>
+<p>甲乙の関係は、乙が甲に本プログラムを提供し甲がこれを利用する<strong>サービス提供関係</strong>であり、<strong>雇用関係、民法第643条に定める委任若しくは同法第656条に定める準委任に基づく関係</strong>を構成するものではありません。</p>
+<hr class="sep" />
+<h2>第3条（本プログラムの概要）</h2>
+<p>1. 本プログラムの名称は「<strong>AI業務再設計30日伴走プログラム</strong>」とします。</p>
+<p>2. 本プログラムは、生成AIの一般的な「使い方」の説明のみを目的とするものではなく、次のような流れを通じて、甲の現場に即した業務再設計とワークフロー構築を目指すものです。  <br />
+   （1）AIにより最もインパクトが出せる業務の特定  <br />
+   （2）ワークフローの構築  <br />
+   （3）現場での利用  <br />
+   （4）エラー等の発生に応じた修正  <br />
+   （5）上記一連の流れの言語化及び、甲が自ら実施できる状態への移行  </p>
+<p>3. 乙は、週に一定時間のミーティングによるアドバイスのみを主とする形態ではなく、甲の現場に寄り添い、利用するツールの選定、変更対象となる業務の範囲、実装方法等について、当事者としてワークフローを組み立て実装するところまで対応するものとします。</p>
+<p>4. 乙は、実装後、<strong>なぜ当該ツールを選定したか、なぜ当該設計としたか</strong>について、甲が今後自ら手を動かせるよう、判断の裏側を言語化して説明するものとします。乙は、甲に対し「作って終わり」の一方的な成果物の提供のみを目的としません。</p>
+<p>5. 本プログラムの履行にあたり利用する生成AIサービス、クラウドサービス、アプリケーションその他第三者が提供する有料又は従量課金のサービスに要する料金、ライセンス料その他の費用（以下「<strong>ツール費用</strong>」という。）は、<strong>原則として甲の負担</strong>とします。ただし、甲乙が別段の合意をした場合は、この限りではありません。</p>
+<hr class="sep" />
+<h2>第4条（契約期間）</h2>
+<p>1. 本契約の期間は、<strong>30日間（本プログラム開始日から起算）</strong>とします。</p>
+<p>2. 本プログラム開始日は、甲乙協議のうえ、電子メール又は本契約末尾の契約日欄に定めるものとします。</p>
+<p>3. 甲が継続を希望し、乙が承諾した場合、甲乙は書面又は第1条第3項に定める通知等により、継続期間、利用料金その他の条件を定めるものとします。乙が見積書、提案書その他の書面において<strong>継続時の月額利用料金を金30,000円</strong>と提示しているときは、甲乙が別段の合意をしない限り、当該金額を月額利用料金とします（消費税は第5条第2項に従います。）。継続の有無及び期間は、都度甲乙の合意が必要とします。</p>
+<p>4. <strong>伴走終了日</strong>とは、第1項の期間の末日が終了する日時をいいます。ただし、甲乙が書面又は第1条第3項に定める通知等により別段の伴走終了日を定めた場合は、その日時とします。</p>
+<hr class="sep" />
+<h2>第5条（利用料金）</h2>
+<p>1. 甲は、乙に対し、本プログラムの利用の対価として、<strong>金30,000円</strong>（以下「本利用料金」といいます）を支払うものとします。</p>
+<p>2. 本利用料金が消費税課税対象である場合、甲は、本利用料金に加えて、当該消費税相当額を支払うものとします。乙が課税事業者でない等の理由により消費税が課されない場合は、第1項の金額のみを支払うものとします。</p>
+<p>3. 甲は、本利用料金（前項の消費税相当額を含む。以下同じ。）を、乙が指定する銀行口座へ振込送金の方法により支払うものとします。振込手数料は、甲の負担とします。</p>
+<p>4. 本利用料金の支払期日は、<strong>本契約締結日から起算して7日以内</strong>とします。ただし、甲乙が別段の合意をした場合は、この限りではありません。</p>
+<p>5. 乙は、第9条に基づき返金義務が生じた場合、同条に従い本利用料金を返金するものとします。</p>
+<p>6. 甲が第4項の支払期日までに本利用料金の支払をしない場合、乙は本プログラムの提供を開始せず、又は中断することができます。乙は、相当の期間を定めて甲に催告し、当該期間内に支払がないときは、本契約の全部又は一部を解除することができます。</p>
+<hr class="sep" />
+<h2>第6条（受講者の協力義務）</h2>
+<p>1. 甲は、業務の実態、利用ツール、制約事項等について、乙に対し、合理的な範囲で正確に情報を提供するものとします。</p>
+<p>2. 甲は、ワークフローの構築及び試行に際し、自ら操作・検証に協力するものとします。</p>
+<p>3. 甲が前二項に違反し、又は著しく協力を拒んだことにより本プログラムの目的達成が困難となった場合、乙はその責めに任じないものとします。</p>
+<hr class="sep" />
+<h2>第7条（秘密保持）</h2>
+<p>1. 当事者は、本プログラムの提供及び本契約の履行に関連して相手方から開示された営業上・技術上の秘密その他開示の際に秘密として指定された情報（以下「秘密情報」といいます）を、厳に秘密として保持し、本契約の目的以外に使用し、又は第三者に開示してはなりません。</p>
+<p>2. 次の各号のいずれかに該当する情報は、秘密情報に含まれないものとします。  <br />
+   （1）開示を受けた時点で既に公知であった情報  <br />
+   （2）開示を受けた後、自己の責めに帰し得ない事由により公知となった情報  <br />
+   （3）正当な権限を有する第三者から秘密保持義務を負うことなく入手した情報  <br />
+   （4）開示を受ける前に自ら保有していたことを証明できる情報  </p>
+<p>3. 本条の義務は、本契約終了後も<strong>3年間</strong>存続するものとします。</p>
+<hr class="sep" />
+<h2>第7条の2（個人情報の取扱い）</h2>
+<p>当事者は、本契約の履行に関連して個人情報を取り扱う場合、個人情報の保護に関する法律その他関係法令を遵守し、目的の範囲内で適切に取り扱うものとします。</p>
+<hr class="sep" />
+<h2>第8条（実績公開・SNS等への掲載）</h2>
+<p>1. 乙が、本プログラムの広告・宣伝・実績紹介のため、<strong>X（旧Twitter）、Instagram、Facebook、YouTube、その他のソーシャル・ネットワーキング・サービス、ブログ、ウェブサイト、印刷物、講演資料等</strong>（以下「<strong>SNS等</strong>」といいます）において、次のいずれかに該当する内容を公開するか否かは、<strong>甲の事前の書面又は甲乙が合意する電子メール等による承諾</strong>を要するものとします。  <br />
+   （1）甲の氏名、商号、屋号、サービス名、ロゴ、肖像その他甲を特定し又は識別し得る情報  <br />
+   （2）甲の業務内容、売上、顧客、案件の有無その他の具体的な業務・取引に関する情報  <br />
+   （3）本プログラムを通じて甲に生じた変化、成果、ビフォー・アフター、数値、エピソードその他、甲又は甲の事業に関連する記述  <br />
+   （4）前各号に準ずる情報  </p>
+<p>2. <strong>前項の承諾がない限り、乙は上記の公開を行ってはなりません。</strong> 口頭のみの了解、又は本契約の締結そのものをもって公開を承諾したものとみなすことはしないものとします（<strong>別紙1</strong>に基づき甲が同意した場合を除きます。）。</p>
+<p>3. 甲が第1項の公開を承諾する場合でも、公開の<strong>範囲（プラットフォーム、掲載期間、掲載文の最終稿の確認の要否等）</strong>は、甲乙協議のうえ、可能な限り書面又は電子メール等で定めるものとします。甲が承諾する場合、<strong>別紙1（実績・SNS公開同意範囲）</strong>にチェック等を付して定めることができるものとします。</p>
+<p>4. 甲は、承諾後であっても、<strong>人格権の行使その他正当な理由がある場合</strong>、乙に対し、合理的な範囲で公開の中止・訂正・削除を求めることができます。乙は、法令に反しない限り、速やかにこれに協力するものとします。</p>
+<p>5. 本条に違反して乙が公開したことにより甲に損害が生じた場合、乙は、故意又は重過失があるときは、甲に対しその損害を賠償する責めを負います。</p>
+<hr class="sep" />
+<h2>第9条（全額返金保証）</h2>
+<p>1. 乙は、<strong>本プログラムの伴走が終了した時点</strong>において、甲が本プログラムの内容について<strong>「価値を感じられなかった」</strong>と判断した場合、甲からの申出に基づき、甲が乙に支払済みの本利用料金（消費税相当額を含む。）を<strong>全額返金</strong>するものとします。</p>
+<p>2. 甲は、前項の返金を受けるため、<strong>伴走終了日の翌日から起算して14日以内</strong>に、第1条第3項に定める方法又は書面により、乙にその旨を申し出るものとします。当該期間を経過した申出に対して、乙は返金義務を負わないものとします。</p>
+<p>3. 乙は、前項の申出を受領した日から<strong>14営業日以内</strong>に、甲が指定する銀行口座へ振込送金の方法により返金金を送金するものとします。振込手数料は、乙の負担とします。</p>
+<p>4. 次の各号のいずれかに該当する場合、乙は第1項に基づく返金義務を負わないものとします。  <br />
+   （1）甲が第6条の協力義務に著しく違反し、本プログラムの提供が著しく困難となった場合  <br />
+   （2）第2項の申出期限を経過した場合  <br />
+   （3）甲が虚偽の申出を行った場合  </p>
+<hr class="sep" />
+<h2>第10条（成果・保証の限界）</h2>
+<p>1. 乙は、甲の<strong>特定の売上・利益・契約獲得等の経済結果</strong>又は<strong>第三者からの評価</strong>を保証するものではありません。</p>
+<p>2. 本プログラムは、業務の再設計及びAIワークフロー構築の伴走を目的とするものであり、その達成度合いは甲の業務内容、投入時間、外部環境等に左右されます。</p>
+<hr class="sep" />
+<h2>第11条（著作権等）</h2>
+<p>1. 本プログラムの履行過程において乙が新たに作成した文章、手順書、設定案、スクリプト、テンプレートその他の著作物（以下「成果物」という。）の著作権（著作権法第27条及び第28条に規定する権利を含む。）は、<strong>乙に帰属</strong>します。</p>
+<p>2. 乙は、甲に対し、成果物について、甲が<strong>自らの事業の範囲内において</strong>、複製、使用、改作その他必要な利用を<strong>無償かつ非独占的</strong>に行うことができるよう、許諾します。甲は、本項に基づく利用の範囲を超えて成果物を第三者に譲渡、貸与又は公開するには、乙の事前の書面による承諾を要します。</p>
+<p>3. 甲が既に有するデータ、商標、商号、コンテンツに関する権利は、甲に帰属します。</p>
+<hr class="sep" />
+<h2>第11条の2（第三者への再委託）</h2>
+<p>乙は、甲の事前の書面による承諾なく、<strong>本プログラムの提供</strong>の全部又は重要な一部を第三者に再委託してはなりません。</p>
+<hr class="sep" />
+<h2>第11条の3（契約上の地位の譲渡等）</h2>
+<p>当事者は、相手方の事前の書面による承諾なく、本契約上の地位又は本契約に基づく権利義務の全部又は一部を第三者に譲渡し、承継させ、又は担保に供してはなりません。</p>
+<hr class="sep" />
+<h2>第11条の4（反社会的勢力の排除）</h2>
+<p>1. 当事者は、自らが現在、暴力団、暴力団員、暴力団員でなくなった時から5年を経過しない者、暴力団準構成員、暴力団関係企業、総会屋等、社会運動等標ぼうゴロ又は特殊知能暴力集団その他これらに準ずる者（以下「反社会的勢力」という。）に該当せず、かつ反社会的勢力と社会的に非難されるべき関係を有しないことを表明し、保証します。</p>
+<p>2. 当事者は、自ら又は第三者を利用して、相手方に対し、暴力的行為、法的な責任を超えた不当な要求、取引に関して脅迫的な言動をし、又は暴力を用いる行為、風説を流布し、偽計を用い又は威力を用いて相手方の信用を毀損し、又は相手方の業務を妨害する行為をしてはなりません。</p>
+<p>3. 前二項に違反した場合、相手方は催告なくして本契約を解除することができます。</p>
+<hr class="sep" />
+<h2>第12条（契約の解除）</h2>
+<p>1. 当事者の一方が、本契約に重大に違反し、相当期間を定めた催告後も是正されないとき、相手方は本契約を解除することができます。</p>
+<p>2. 前項のほか、民法その他法令に基づく解除が認められる場合、当事者は法令に従い本契約を解除することができます。</p>
+<hr class="sep" />
+<h2>第13条（損害賠償）</h2>
+<p>当事者は、自己の責めに帰すべき事由により相手方に損害を与えた場合、<strong>直接かつ現実に発生した通常の損害</strong>の範囲で賠償する責めを負います。ただし、乙の責めに帰さない事由から生じた損害について、乙は賠償義務を負いません。</p>
+<hr class="sep" />
+<h2>第14条（準拠法・管轄）</h2>
+<p>1. 本契約は、日本法に準拠し、同法に従って解釈されるものとします。</p>
+<p>2. 本契約に関し訴訟の必要が生じた場合、<strong>乙（サービス提供者）の住所地を管轄する地方裁判所</strong>を第一審の専属的合意管轄裁判所とします。</p>
+<p>3. 前項の合意管轄に関する定めは、甲が消費者である場合その他強行法規により無効又は効力を制限されることがあります。</p>
+<hr class="sep" />
+<h2>第15条（協議）</h2>
+<p>本契約に定めのない事項又は本契約の解釈に疑義が生じた場合、甲乙は誠意をもって協議のうえ解決するものとします。</p>
+<hr class="sep" />
+<h2>第16条（契約の成立）</h2>
+<p>1. 本契約は、甲乙が本書に署名又は記名捺印した時に成立するものとします。</p>
+<p>2. 前項に定める署名又は記名捺印に代え、甲乙は、<strong>記名捺印した書面のスキャン画像を電子メールに添付して送付する方法</strong>、<strong>電子署名サービスを用いる方法</strong>その他甲乙が合意する方法により、本契約を締結することができます。この場合も、本契約は第1項と同等の効力を有します。</p>
+<hr class="sep" />
+    <p><strong>（以下余白）</strong></p>
+    <p>本契約の成立を証するため、本書2通を作成し、甲乙が署名又は記名捺印のうえ、各自1通を保有する。</p>
+
+    <table class="sign-table">
+      <tr>
+        <td class="lbl">契約締結日（西暦）</td>
+        <td>
+          <input type="text" class="w-year" id="sig_y" inputmode="numeric" maxlength="4" placeholder="年" /> 年
+          <input type="text" class="w-month" id="sig_m" inputmode="numeric" maxlength="2" placeholder="月" /> 月
+          <input type="text" class="w-day" id="sig_d" inputmode="numeric" maxlength="2" placeholder="日" /> 日
+        </td>
+      </tr>
+      <tr>
+        <td class="lbl">（甲・受講者）住所</td>
+        <td><span id="mirror_kou_addr"></span></td>
+      </tr>
+      <tr>
+        <td class="lbl">氏名又は名称（印）</td>
+        <td><span id="mirror_kou_name"></span></td>
+      </tr>
+      <tr>
+        <td class="lbl">（乙・サービス提供者）住所</td>
+        <td><span id="mirror_otsu_addr"></span></td>
+      </tr>
+      <tr>
+        <td class="lbl">氏名又は名称（印）</td>
+        <td><span id="mirror_otsu_name"></span></td>
+      </tr>
+    </table>
+
+    <hr class="sep" />
+
+    <h2>別紙1　実績・SNS公開の同意範囲</h2>
+    <p>本別紙は、本契約第8条に基づき、甲が乙による実績公開を承諾する場合に用います。甲が承諾しない場合、本別紙への記入は要しません。</p>
+    <p>甲は、以下について、選択又は記入のうえ、署名又は記名捺印します。</p>
+
+    <table class="besshi-table">
+      <thead>
+        <tr><th>項目</th><th>可否</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>甲の<strong>実名</strong>の掲載</td>
+          <td class="besshi-opts"><label><input type="radio" name="b1" value="可" /> 可</label><label><input type="radio" name="b1" value="不可" /> 不可</label></td>
+        </tr>
+        <tr>
+          <td><strong>屋号・ブランド名のみ</strong>（実名なし）</td>
+          <td class="besshi-opts"><label><input type="radio" name="b2" value="可" /> 可</label><label><input type="radio" name="b2" value="不可" /> 不可</label></td>
+        </tr>
+        <tr>
+          <td><strong>匿名</strong>（業種・規模の一般的表現にとどめる）</td>
+          <td class="besshi-opts"><label><input type="radio" name="b3" value="可" /> 可</label><label><input type="radio" name="b3" value="不可" /> 不可</label></td>
+        </tr>
+        <tr>
+          <td>業務内容・成果の<strong>概要</strong>の記述</td>
+          <td class="besshi-opts"><label><input type="radio" name="b4" value="可" /> 可</label><label><input type="radio" name="b4" value="不可" /> 不可</label></td>
+        </tr>
+        <tr>
+          <td><strong>ビフォー・アフター</strong>（業務プロセス・時間等）</td>
+          <td class="besshi-opts"><label><input type="radio" name="b5" value="可" /> 可</label><label><input type="radio" name="b5" value="不可" /> 不可</label></td>
+        </tr>
+        <tr>
+          <td><strong>画面キャプチャ・成果物の一部</strong></td>
+          <td class="besshi-opts"><label><input type="radio" name="b6" value="可" /> 可</label><label><input type="radio" name="b6" value="不可" /> 不可</label></td>
+        </tr>
+        <tr>
+          <td>公開先（例：X / Instagram / ブログ / 講演）</td>
+          <td><input type="text" id="besshi_public_to" style="width:100%" /></td>
+        </tr>
+        <tr>
+          <td>掲載前に<strong>原稿の最終確認</strong>を要する</td>
+          <td class="besshi-opts"><label><input type="radio" name="b7" value="要" /> 要</label><label><input type="radio" name="b7" value="不要" /> 不要</label></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>同意日（西暦）</strong>
+      <input type="text" class="w-year" id="besshi_y" maxlength="4" /> 年
+      <input type="text" class="w-month" id="besshi_m" maxlength="2" /> 月
+      <input type="text" class="w-day" id="besshi_d" maxlength="2" /> 日
+    </p>
+    <p><strong>（甲・受講者）</strong> <span id="mirror_kou_name2"></span>　（印）</p>
+  </main>
+
+  <script>
+  (function () {
+    const PROVIDER_DEFAULTS = {
+      name: "佐藤大生",
+      address: "埼玉県上尾市弁財2丁目9-22-2号 ボンスヴニール II 202",
+      email: "daiki@aiessences.com",
+      corpRep: ""
+    };
+
+    const LS_PREFIX = "contract_fillable_v2_";
+    const OTSU_IDS = ["otsu_name", "otsu_addr", "otsu_rep", "otsu_email"];
+
+    function lsSet(key, val) {
+      try {
+        localStorage.setItem(LS_PREFIX + key, val);
+      } catch (e) { /* プライベートブラウズ等 */ }
+    }
+    function lsGet(key) {
+      try {
+        return localStorage.getItem(LS_PREFIX + key);
+      } catch (e) {
+        return null;
+      }
+    }
+    function lsRemove(key) {
+      try {
+        localStorage.removeItem(LS_PREFIX + key);
+      } catch (e) { /* noop */ }
+    }
+
+    function loadDefaults() {
+      document.getElementById("otsu_name").value = PROVIDER_DEFAULTS.name;
+      document.getElementById("otsu_addr").value = PROVIDER_DEFAULTS.address;
+      document.getElementById("otsu_email").value = PROVIDER_DEFAULTS.email;
+      document.getElementById("otsu_rep").value = PROVIDER_DEFAULTS.corpRep;
+    }
+
+    function loadStorage() {
+      document.querySelectorAll("input[type=text], input[type=email], input:not([type])").forEach(function (el) {
+        if (!el.id) return;
+        if (OTSU_IDS.indexOf(el.id) !== -1) return;
+        var v = lsGet(el.id);
+        if (v !== null) el.value = v;
+      });
+      document.querySelectorAll("input[type=radio]").forEach(function (el) {
+        if (!el.name) return;
+        var v = lsGet("radio_" + el.name);
+        if (v !== null && el.value === v) el.checked = true;
+      });
+    }
+
+    function saveField(el) {
+      if (!el.id) return;
+      if (OTSU_IDS.indexOf(el.id) !== -1) return;
+      lsSet(el.id, el.value);
+    }
+
+    function saveRadio(el) {
+      if (el.checked) lsSet("radio_" + el.name, el.value);
+    }
+
+    function mirror() {
+      var empty = "　　　　　";
+      function t(id) {
+        var el = document.getElementById(id);
+        return (el && el.value.trim()) ? el.value : empty;
+      }
+      document.getElementById("mirror_kou_addr").textContent = t("kou_addr");
+      document.getElementById("mirror_kou_name").textContent = t("kou_name");
+      document.getElementById("mirror_otsu_addr").textContent = t("otsu_addr");
+      document.getElementById("mirror_otsu_name").textContent = t("otsu_name");
+      document.getElementById("mirror_kou_name2").textContent = t("kou_name");
+    }
+
+    loadDefaults();
+    loadStorage();
+    mirror();
+
+    ["kou_name","kou_addr","kou_rep","kou_email","otsu_name","otsu_addr","otsu_rep","otsu_email","sig_y","sig_m","sig_d","besshi_public_to","besshi_y","besshi_m","besshi_d"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener("input", function () { saveField(el); mirror(); });
+      el.addEventListener("change", function () { saveField(el); mirror(); });
+    });
+
+    document.querySelectorAll("input[type=radio]").forEach(function (el) {
+      el.addEventListener("change", function () { saveRadio(el); });
+    });
+
+    document.getElementById("btnPrint").addEventListener("click", function () {
+      mirror();
+      window.print();
+    });
+
+    document.getElementById("btnClearKou").addEventListener("click", function () {
+      ["kou_name","kou_addr","kou_rep","kou_email"].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) { el.value = ""; lsRemove(id); }
+      });
+      mirror();
+    });
+
+  })();
+  </script>
+</body>
+</html>
